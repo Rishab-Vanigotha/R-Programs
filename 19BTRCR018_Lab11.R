@@ -1,5 +1,10 @@
 library(readxl)
-ageandheight <- read_excel('ageandheight.xls')
+library(httr)
+
+url1<-'https://github.com/Corvu-s/R-machine-learning-/blob/master/ageandheight.xls'
+GET(url1, write_disk(tf <- tempfile(fileext = ".xls")))
+
+ageandheight <- read_excel(path = tf)
 ageandheight <- data.frame(ageandheight)
 #Upload the data
 lmHeight = lm(height~age, data = ageandheight)
@@ -15,4 +20,4 @@ t_line=lm(y ~ x)
 residuals(t_line)
 residuals(t_line)^2
 sum(residuals(t_line)^2)
-
+              
